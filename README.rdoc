@@ -1,4 +1,4 @@
-*This is a fork of {jayfajardo/openlibrary}[https://github.com/jayfajardo/openlibrary] that aims at two goals: bump dependency versions up so that it is feasible to use it alongside modern gems and undo the mess that Hashie::Mash does. (REQUESTS RETURN HASHES WITH SYMBOLIZED KEYS)*
+**This is a fork of {jayfajardo/openlibrary}[https://github.com/jayfajardo/openlibrary] that aims at two goals: bump dependency versions up so that it is feasible to use it alongside modern gems and undo the mess that Hashie::Mash does. (REQUESTS RETURN HASHES WITH SYMBOLIZED KEYS)**
 
 == Openlibrary
 
