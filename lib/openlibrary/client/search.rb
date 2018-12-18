@@ -18,7 +18,7 @@ module Openlibrary
       data = request("/search.json", params: processed_params)
       results = []
       data["docs"][offset...offset+limit].each do |result|
-        results << Hashie::Mash.new(result)
+        results << Hashie.symbolize_keys!(result)
       end
       results
     end

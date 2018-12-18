@@ -12,7 +12,7 @@ module Openlibrary
     #
     def save(key, cookie, update, comment)
       response = update("#{key}", "#{cookie}", "#{update}", "#{comment}")
-      Hashie::Mash.new(response)
+      Hashie.symbolize_keys!(response)
     end
   end
 end

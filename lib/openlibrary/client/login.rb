@@ -4,7 +4,7 @@ module Openlibrary
     #
     def login(username, password)
       response = protected_login("#{username}", "#{password}")
-      cookie = Hashie::Mash.new(response).session
+      cookie = Hashie.symbolize_keys!(response)[:session]
     end
   end
 end

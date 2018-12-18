@@ -4,7 +4,7 @@ module Openlibrary
     #
     def book(olid)
       data = request("/books/#{olid}")
-      Hashie::Mash.new(data)
+      Hashie.symbolize_keys!(data)
     end
 
     def book_by_isbn(isbn)
