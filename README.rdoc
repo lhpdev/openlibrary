@@ -1,3 +1,5 @@
+*This is a fork of {jayfajardo/openlibrary}[https://github.com/jayfajardo/openlibrary] that aims at two goals: bump dependency versions up so that it is feasible to use it alongside modern gems and undo the mess that Hashie::Mash does. (REQUESTS RETURN HASHES WITH SYMBOLIZED KEYS)*
+
 == Openlibrary
 
 {<img src="https://badge.fury.io/rb/openlibrary.png" alt="Gem Version" />}[http://badge.fury.io/rb/openlibrary]
@@ -197,7 +199,7 @@ Other built-in finder methods:
 === Openlibrary::Details
 
 Instantiate the class:
-  
+
   details = Openlibrary::Details
 
 Look up a book by its ISBN-10 or ISBN-13:
