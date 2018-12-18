@@ -6,6 +6,8 @@ require 'rest-client'
 require 'webmock'
 require 'webmock/rspec'
 
+RSpec::Support::ObjectFormatter.default_instance.max_formatted_output_length = 4096 * 4
+
 RSpec.configure do |config|
   config.color = true
   config.formatter     = 'documentation'
@@ -32,8 +34,7 @@ def stub_put(path, fixture_name, comment)
         'Content-Type' => 'application/json',
         'Opt'          => '"http://openlibrary.org/dev/docs/api"; ns=42',
         '42-comment'   => comment,
-        'Cookie'       => 'cookie',
-        'User-Agent'   => 'Ruby'
+        'Cookie'       => 'cookie'
       }).
     to_return(
       status:  200,

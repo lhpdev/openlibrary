@@ -25,30 +25,30 @@ describe 'Client' do
 
       book = client.book('OL23109860M')
 
-      expect(book).to be_a Hashie::Mash
-      expect(book.contributors).to be_a Array
-      expect(book.covers).to be_a       Array
-      expect(book.works).to be_a        Array
+      expect(book).to be_a Hash
+      expect(book[:contributors]).to be_a Array
+      expect(book[:covers]).to be_a       Array
+      expect(book[:works]).to be_a        Array
 
-      expect(book.title).to eq                    'The Great Gatsby'
-      expect(book.by_statement).to eq             'F. Scott Fitzgerald.'
-      expect(book.number_of_pages).to eq          180
-      expect(book.contributors[0].name).to eq     'Francis Cugat'
-      expect(book.contributors[0].role).to eq     'Cover Art'
-      expect(book.copyright_date).to eq           '1925'
-      expect(book.isbn_10[0]).to eq               '0743273567'
-      expect(book.identifiers.goodreads[0]).to eq '4671'
-      expect(book.identifiers.google[0]).to eq    'iXn5U2IzVH0C'
-      expect(book.physical_format).to eq          'Trade Paperback'
-      expect(book.publishers[0]).to eq            'Scribner'
-      expect(book.subjects[1]).to eq              'First loves -- Fiction'
-      expect(book.subjects[0]).to eq              'Traffic accidents -- Fiction'
+      expect(book[:title]).to eq                    'The Great Gatsby'
+      expect(book[:by_statement]).to eq             'F. Scott Fitzgerald.'
+      expect(book[:number_of_pages]).to eq          180
+      expect(book[:contributors][0][:name]).to eq     'Francis Cugat'
+      expect(book[:contributors][0][:role]).to eq     'Cover Art'
+      expect(book[:copyright_date]).to eq           '1925'
+      expect(book[:isbn_10][0]).to eq               '0743273567'
+      expect(book[:identifiers][:goodreads][0]).to eq '4671'
+      expect(book[:identifiers][:google][0]).to eq    'iXn5U2IzVH0C'
+      expect(book[:physical_format]).to eq          'Trade Paperback'
+      expect(book[:publishers][0]).to eq            'Scribner'
+      expect(book[:subjects][1]).to eq              'First loves -- Fiction'
+      expect(book[:subjects][0]).to eq              'Traffic accidents -- Fiction'
 
       # Because of a conflict with the internal `key?` method of
-      # Hashie::Mash, any key actually named 'key' must be referenced
+      # Hash, any key actually named 'key' must be referenced
       # with a bang (!) to get the value.
-      expect(book.key!).to eq                     '/books/OL23109860M'
-      expect(book.languages[0].key!).to eq           '/languages/eng'
+      expect(book[:key]).to eq                     '/books/OL23109860M'
+      expect(book[:languages][0][:key]).to eq           '/languages/eng'
     end
   end
 
@@ -118,20 +118,20 @@ describe 'Client' do
 
       author = client.author('OL1A')
 
-      expect(author).to be_a Hashie::Mash
-      expect(author.name).to eq                'Sachi Rautroy'
-      expect(author.personal_name).to eq       'Sachi Rautroy'
-      expect(author.death_date).to eq          '2004'
-      expect(author.birth_date).to eq          '1916'
-      expect(author.last_modified.type).to eq  '/type/datetime'
-      expect(author.last_modified.value).to eq '2008-11-16T07:25:54.131674'
-      expect(author.id).to eq                  97
-      expect(author.revision).to eq            6
+      expect(author).to be_a Hash
+      expect(author[:name]).to eq                'Sachi Rautroy'
+      expect(author[:personal_name]).to eq       'Sachi Rautroy'
+      expect(author[:death_date]).to eq          '2004'
+      expect(author[:birth_date]).to eq          '1916'
+      expect(author[:last_modified][:type]).to eq  '/type/datetime'
+      expect(author[:last_modified][:value]).to eq '2008-11-16T07:25:54.131674'
+      expect(author[:id]).to eq                  97
+      expect(author[:revision]).to eq            6
 
       # Because of a conflict with the internal `key?` method of
-      # Hashie::Mash, any key actually named 'key' must be referenced
+      # Hash, any key actually named 'key' must be referenced
       # with a bang (!) to get the value.
-      expect(author.key!).to eq                '/authors/OL1A'
+      expect(author[:key]).to eq                '/authors/OL1A'
     end
   end
 
@@ -177,17 +177,17 @@ describe 'Client' do
 
       editions = client.editions('OL27258W', 10, 0)
 
-      expect(editions).to be_a Hashie::Mash
-      expect(editions.entries).to be_a Array
+      expect(editions).to be_a Hash
+      expect(editions[:entries]).to be_a Array
 
-      expect(editions.size!).to eq      19
-      expect(editions.links.next).to eq '/works/OL27258W/editions.json?limit=10&offset=10'
-      expect(editions.links.self).to eq '/works/OL27258W/editions.json?limit=10&offset=0'
-      expect(editions.links.work).to eq '/works/OL27258W'
+      expect(editions[:size]).to eq      19
+      expect(editions[:links][:next]).to eq '/works/OL27258W/editions.json?limit=10&offset=10'
+      expect(editions[:links][:self]).to eq '/works/OL27258W/editions.json?limit=10&offset=0'
+      expect(editions[:links][:work]).to eq '/works/OL27258W'
 
       # Failing tests for iteration through entries
       #
-      # editions.entries[0].should be_a Hashie::Mash
+      # editions.entries[0].should be_a Hash
       # editions.entries[0].number_of_pages.should eq 322
     end
   end
@@ -205,15 +205,15 @@ describe 'Client' do
       search = client.search(search, 5, 10)
 
       expect(search.size).to eq         5
-      expect(search[0].key!).to eq   'OL14926051W'
-      expect(search[0].title).to eq  'The Lord of Rings'
+      expect(search[0][:key]).to eq   'OL14926051W'
+      expect(search[0][:title]).to eq  'The Lord of Rings'
 
       expect {client.search("capitalism and freedom")}.not_to raise_error
       free_search = client.search("capitalism and freedom")
 
       expect(free_search.size).to eq                10
-      expect(free_search[0].key!).to eq             'OL2747782W'
-      expect(free_search[0].author_name[0]).to eq   'Milton Friedman'
+      expect(free_search[0][:key]).to eq             'OL2747782W'
+      expect(free_search[0][:author_name][0]).to eq   'Milton Friedman'
     end
   end
 
@@ -249,8 +249,8 @@ describe 'Client' do
 
       object = client.save(key, cookie, update, comment)
 
-      expect(object.weight).to eq '1.5 pounds'
-      expect(object.number_of_pages).to eq 1103
+      expect(object[:weight]).to eq '1.5 pounds'
+      expect(object[:number_of_pages]).to eq 1103
     end
   end
 end
