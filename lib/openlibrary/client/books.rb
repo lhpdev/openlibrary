@@ -4,6 +4,11 @@ module Openlibrary
     #
     def book(olid)
       data = request("/books/#{olid}")
+
+      if data.nil? 
+        data = request("/works/#{olid}")
+      end
+
       Hashie.symbolize_keys!(data)
     end
 
