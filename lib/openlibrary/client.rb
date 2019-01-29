@@ -1,5 +1,6 @@
 require_relative 'request'
 require_relative 'client/books'
+require_relative 'client/works'
 require_relative 'client/authors'
 require_relative 'client/history'
 require_relative 'client/recent'
@@ -12,6 +13,7 @@ module Openlibrary
   class Client
     include Openlibrary::Request
     include Openlibrary::Books
+    include Openlibrary::Works
     include Openlibrary::Authors
     include Openlibrary::History
     include Openlibrary::Recent

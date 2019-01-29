@@ -1,14 +1,14 @@
 module Openlibrary
-  module Books
-    # Find books in Open Library by OLID, ISBN, LCCN, or OCLC
+  module Works
+    # Find book_works in Open Library by OLID, ISBN, LCCN, or OCLC
     #
-    def book(olid)
-      data = request("/books/#{olid}")
+    def book_work(olid)
+      data = request("/works/#{olid}")
 
       Hashie.symbolize_keys!(data)
     end
 
-    def book_by_isbn(isbn)
+    def book_work_by_isbn(isbn)
       type = "/type/edition"
       if isbn.length == 10
         data = query("type=#{type}&isbn_10=#{isbn}")
@@ -19,12 +19,12 @@ module Openlibrary
       end
     end
 
-    def book_by_lccn(lccn)
+    def book_work_by_lccn(lccn)
       type = "/type/edition"
       data = query("type=#{type}&lccn=#{lccn}")
     end
 
-    def book_by_oclc(oclc)
+    def book_work_by_oclc(oclc)
       type = "/type/edition"
       data = query("type=#{type}&oclc_numbers=#{oclc}")
     end
